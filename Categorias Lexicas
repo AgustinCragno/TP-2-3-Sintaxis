@@ -1,0 +1,26 @@
+token: palabraReservada
+       identificador
+       constante
+       operador
+       cadena      
+
+palabraReservada: algoritmo                    
+                  leer
+                  escribir
+                  variable
+                  finAlgorimo
+
+identificador: caracter
+               identificador caracter
+               identificador numerica
+
+constante: numerica
+           caracter
+           
+numerica: (uno de) 0 1 2 3
+caracter: (uno de) a b c d
+
+cadena: "caracteres"
+caracteres: caracteres constante
+
+operador: (uno de) + - =
