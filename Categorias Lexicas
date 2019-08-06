@@ -56,4 +56,62 @@ operador = '+' + '-' + '='
 
 
 
+Tablas de Transicion
+
+Para que no quede gigante puse los caracteres como a, b, c, etc. en realidad van como dice arriba, osea en token
+las columnas son palabraReservada, identificador, constante, etc.
+
+token / palabra reservada:
+
+       | A | B | C | D | E
+   0-  | 1 | 1 | 1 | 1 | 1
+   1+  | - | - | - | - | -
+   
+   
+identificador:
+
+       | A | B 
+   0-  | 1 | -
+   1+  | 1 | 1 
+   
+
+constante:
+
+       | A | B 
+   0-  | 1 | 1
+   1+  | - | - 
+   
+   
+
+numerica / caracter:
+
+       | A | B | C | D 
+   0-  | 1 | 1 | 1 | 1 
+   1+  | - | - | - | - 
+
+
+cadena: 
+
+       | A | B 
+   0-  | 1 | -
+   1   | - | 2 
+   2   | 3 | - 
+   3+  | - | - 
+
+
+caracteres:
+
+        | A 
+   0-+  | 0 
+
+
+operador:
+
+       | A | B | C 
+   0-  | 1 | 1 | 1 
+   1+  | - | - | - 
+
+
+
+
 
