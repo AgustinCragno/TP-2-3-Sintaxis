@@ -49,7 +49,7 @@ caracter = a + b + c + d
 
 cadena = ".caracteres."
 
-caracteres = constante*
+caracteres = constante+
 
 operador = '+' + '-' + '='
 
@@ -101,8 +101,9 @@ cadena:
 
 caracteres:
 
-        | A 
-   0-+  | 0 
+       | A 
+   0-  | 1
+   1+  | 1
 
 
 operador:
