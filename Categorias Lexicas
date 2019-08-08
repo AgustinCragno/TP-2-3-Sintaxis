@@ -11,6 +11,8 @@ palabraReservada: algoritmo
                   escribir
                   variable
                   finAlgoritmo
+                  si
+                  finSi
 
 identificador: caracter
                identificador constante
@@ -29,7 +31,7 @@ caracteres: caracteres constante
 numeros: numerica 
          numeros numerica
 
-operador: (uno de) + - =
+operador: (uno de) + -
 
 
 
@@ -40,7 +42,7 @@ Expresiones Regulares
 
 token = palabraReservada + identificador + constante + operador + cadena
 
-palabraReservada = algoritmo + leer + escribir + variable + finAlgoritmo
+palabraReservada = algoritmo + leer + escribir + variable + finAlgoritmo + si + finSi
 
 identificador = caracter.constante*
 
@@ -54,7 +56,7 @@ cadena = "caracteres"
 
 caracteres = constante+
 
-operador = '+' + '-' + '='
+operador = '+' + '-'
 
 
 
@@ -64,11 +66,17 @@ Tablas de Transicion
 Para que no quede gigante puse los caracteres como a, b, c, etc. en realidad van como dice arriba, osea en token
 las columnas son palabraReservada, identificador, constante, etc.
 
-token / palabra reservada:
+token:
 
        | A | B | C | D | E
    0-  | 1 | 1 | 1 | 1 | 1
    1+  | - | - | - | - | -
+   
+palabra reservada:
+
+       | A | B | C | D | E | F | G
+   0-  | 1 | 1 | 1 | 1 | 1 | 1 | 1
+   1+  | - | - | - | - | - | - | -
    
    
 identificador:
@@ -78,7 +86,7 @@ identificador:
    1+  | - | 1 
    
 
-constante:
+constante/operador:
 
        | A | B 
    0-  | 1 | 1
@@ -108,12 +116,6 @@ caracteres:
    0-  | 1
    1+  | 1
 
-
-operador:
-
-       | A | B | C 
-   0-  | 1 | 1 | 1 
-   1+  | - | - | - 
 
 
 
