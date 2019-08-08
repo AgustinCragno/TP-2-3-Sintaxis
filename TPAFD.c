@@ -20,11 +20,11 @@
 #include <stdio.h>
 
 struct AFD{
-    int estados[7];
-    char alfabeto[3];  // en el orden de las columnas
+    int estados[10];
+    char alfabeto[10];  // en el orden de las columnas
     int estadoInicial;
-    int estadosFinales[2];
-    int tablaDeTransicion[7][3]; //Filas estados, Columnas caracteres
+    int estadosFinales[1];
+    int tablaDeTransicion[10][10]; //Filas estados, Columnas caracteres
 };
 
 int length(int array[]){
@@ -80,25 +80,105 @@ int pertenceAlLenguaje(struct AFD automata, char cadena[])
 
 int main(){
 
-    struct AFD automata = {
-    .estados = {0,1,2,3,4,5,6},
-    .estadoInicial = 0,
-    .estadosFinales = {5},
-    .alfabeto = {'1', '+', '='},
-    .tablaDeTransicion = {  {1, 6, 6},
-                            {1, 2, 6},
-                            {3, 6, 6},
-                            {3, 6, 4},
-                            {5, 6, 6},
-                            {6, 6, 6},
-                            {6, 6, 6} }
+    struct AFD token = {
+    .estados = {0, 1, 2},
+    .estadoInicial = 0;
+    .estadosFinales = {1},
+    .alfabeto = {"palabraReservada", "identificador", "constante", "operador", "cadena"},
+    .tablaDeTransicion = { {1, 1, 1, 1, 1},
+                           {2, 2, 2, 2, 2},
+                           {2, 2, 2, 2, 2} }
     };
 
-    char cadena[] = "1+1=1";
+    struct AFD palabraReservada = {
+    .estados = {0, 1, 2},
+    .estadoInicial = 0;
+    .estadosFinales = {1},
+    .alfabeto = {"algoritmo","leer","escribir","variable","finAlgoritmo","si","finSi"},
+    .tablaDeTransicion = { {1, 1, 1, 1, 1, 1, 1},
+                           {2, 2, 2, 2, 2, 2, 2},
+                           {2, 2, 2, 2, 2, 2, 2} }
+    };
 
-    int pertenece = 9; pertenece = pertenceAlLenguaje(automata, cadena);
+    struct AFD identificador = {
+    .estados = {0, 1, 2},
+    .estadoInicial = 0;
+    .estadosFinales = {1},
+    .alfabeto = {"caracter","constante"},
+    .tablaDeTransicion = { {1, 2},
+                           {2, 1},
+                           {2, 2} }
+    };
 
-    printf("\nPertenece: %d \n", pertenece );
+    struct AFD constante = {
+    .estados = {0, 1, 2},
+    .estadoInicial = 0;
+    .estadosFinales = {1},
+    .alfabeto = {"numerica","caracter"},
+    .tablaDeTransicion = { {1, 1},
+                           {2, 2},
+                           {2, 2} }
+    };
+
+    struct AFD numerica = {
+    .estados = {0, 1, 2},
+    .estadoInicial = 0;
+    .estadosFinales = {1},
+    .alfabeto = {"0","1","2","3"},
+    .tablaDeTransicion = { {1, 1, 1, 1},
+                           {2, 2, 2, 2},
+                           {2, 2, 2, 2} }
+    };
+
+    struct AFD caracter = {
+    .estados = {0, 1, 2},
+    .estadoInicial = 0;
+    .estadosFinales = {1},
+    .alfabeto = {"a","b","c","d"},
+    .tablaDeTransicion = { {1, 1, 1, 1},
+                           {2, 2, 2, 2},
+                           {2, 2, 2, 2} }
+    };
+
+    struct AFD cadena = {
+    .estados = {0, 1, 2, 3, 4},
+    .estadoInicial = 0;
+    .estadosFinales = {3},
+    .alfabeto = {"\"","caracteres"},
+    .tablaDeTransicion = { {1, 4},
+                           {4, 2},
+                           {3, 4},
+                           {4, 4},
+                           {4, 4} }
+    };
+
+    struct AFD caracteres = {
+    .estados = {0, 1},
+    .estadoInicial = 0;
+    .estadosFinales = {1},
+    .alfabeto = {"constante"},
+    .tablaDeTransicion = { {1},
+                           {1} }
+    };
+
+    struct AFD numeros = {
+    .estados = {0, 1},
+    .estadoInicial = 0;
+    .estadosFinales = {1},
+    .alfabeto = {"numerica"},
+    .tablaDeTransicion = { {1},
+                           {1} }
+    };
+
+    struct AFD operador = {
+    .estados = {0, 1, 2},
+    .estadoInicial = 0;
+    .estadosFinales = {1},
+    .alfabeto = {"+","-"},
+    .tablaDeTransicion = { {1, 1},
+                           {2, 2},
+                           {2, 2} }
+    };
 
     return 0;
 }
