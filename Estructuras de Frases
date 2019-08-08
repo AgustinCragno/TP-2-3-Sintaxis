@@ -1,0 +1,30 @@
+programa: algoritmo $ sentencias $ finAlgoritmo
+
+sentencias: sentencia sentencias
+            sentencia
+            
+sentencia: oracion /
+
+oracion: declaracion
+         operacion
+         lectura
+         escritura
+         condicional
+         
+declaracion: variable identificador = asignacion
+
+asignacion: numeros
+            cadena
+            
+operacion: identificador operador identificador
+
+lectura: leer -> identificador
+
+escritura: resultado -> escribir
+
+resultado: identificador
+           operacion
+           
+condicional: si [condicion] $ sentencias $ finSi
+
+condicion: resultado = 0
