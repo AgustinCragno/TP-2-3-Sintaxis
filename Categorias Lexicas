@@ -10,11 +10,10 @@ palabraReservada: algoritmo
                   leer
                   escribir
                   variable
-                  finAlgorimo
+                  finAlgoritmo
 
 identificador: caracter
-               identificador caracter
-               identificador numerica
+               identificador constante
 
 constante: numerica
            caracter
@@ -39,7 +38,7 @@ token = palabraReservada + identificador + constante + operador + cadena
 
 palabraReservada = algoritmo + leer + escribir + variable + finAlgoritmo
 
-identificador = caracter.(caracter + numerica)*
+identificador = caracter.constante*
 
 constante = numerica + caracter
 
@@ -47,7 +46,7 @@ numerica = 0 + 1 + 2 + 3
 
 caracter = a + b + c + d
 
-cadena = ".caracteres."
+cadena = "caracteres"
 
 caracteres = constante+
 
@@ -72,7 +71,7 @@ identificador:
 
        | A | B 
    0-  | 1 | -
-   1+  | 1 | 1 
+   1+  | - | 1 
    
 
 constante:
