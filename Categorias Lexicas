@@ -22,8 +22,12 @@ numerica: (uno de) 0 1 2 3
 caracter: (uno de) a b c d
 
 cadena: "caracteres"
+
 caracteres: caracteres constante
-            constante              //esto no estaba pero me imagino que iba esto porque sino no termina nunca
+            constante              
+
+numeros: numerica 
+         numeros numerica
 
 operador: (uno de) + - =
 
