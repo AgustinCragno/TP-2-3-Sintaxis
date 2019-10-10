@@ -1,0 +1,57 @@
+programa()
+match(FDA)
+
+programa(){
+ match(algoritmo); match($)
+ sentencias();
+ match($); match(finAlgoritmo)
+
+sentencias(){
+ sentencia()
+ // Una o muchas
+
+sentencia(){
+ oracion()
+ match(/)
+
+oracion(){
+ SWITCH
+  1 declaracion()
+  2 operacion()
+  3 lectura()
+  4 escritura()
+  5 condicional()
+
+declaracion(){
+ match(variable);
+ identificador
+ match(=);
+ asignacion()
+
+asignacion(){
+ SWITCH
+  1 numeros
+  2 cadena
+  
+operacion(){
+ identificador
+ operador
+ identificador
+
+lectura(){
+ match(leer); match(->); identificador
+ 
+escritura(){
+ resultado(); match(->); match(escribir)
+ )
+ 
+condicional(){
+ match(si); match([); condicion(); match(corchete cerrado); match($); sentencias(), match($), match(finSi);
+resultado(){
+ SWITCH
+  1 identificador
+  2 operacion()
+
+condicion(){
+ resultado()
+ match(= 0)
