@@ -1,57 +1,122 @@
-programa()
-match(FDA)
+typedef enum{
+    ALGORITMO, FIN_ALGORITMO, LEER, ESCRIBIR, PESOS, BARRA, CORCHETE_IZQ, CORCHETE_DER,
+    FLECHA, IGUAL, SI, FIN_SI, CERO, VARIABLE, SUMA, RESTA, FDT,
+    IDENTIFICADOR, CONST_NUMERICA, CONST_CADENA
+} TOKEN;
 
-programa(){
- match(algoritmo); match($)
- sentencias();
- match($); match(finAlgoritmo)
+void Objetivo(){
+    Programa();
+    Match(FDT);
+}
 
-sentencias(){
- sentencia()
- // Una o muchas
+void Programa(){
+    Match(ALGORITMO);
+    Match(PESOS);
+    Sentencias();
+    Match(PESOS);
+    Match(FIN_ALGORITMO);
+}
 
-sentencia(){
- oracion()
- match(/)
+void Sentencias(){
+    Sentencia();
+    while(1){
+        switch(ProximoToken()){
+            case VARIABLE:
+            case LEER:
+            case ESCRIBIR:
+            case SI:
+            case IDENTIFICADOR:
+                Sentencia();
+            default:
+                return;
+        }
+    }
+}
 
-oracion(){
- SWITCH
-  1 declaracion()
-  2 operacion()
-  3 lectura()
-  4 escritura()
-  5 condicional()
+void Sentencia(){
+    Oracion();
+    Match(BARRA);
+}
 
-declaracion(){
- match(variable);
- identificador
- match(=);
- asignacion()
+void Oracion(){
+    switch(ProximoToken()){
+        case VARIABLE:
+            Declaracion();
+        case LEER:
+            Lectura();
+        case ESCRIBIR:
+            Escritura();
+        case SI:
+            Condicional();
+        case CORCHETE_IZQ:
+            Operacion();
 
-asignacion(){
- SWITCH
-  1 numeros
-  2 cadena
-  
-operacion(){
- identificador
- operador
- identificador
+        default: break;
+    }
+}
 
-lectura(){
- match(leer); match(->); identificador
- 
-escritura(){
- resultado(); match(->); match(escribir)
- )
- 
-condicional(){
- match(si); match([); condicion(); match(corchete cerrado); match($); sentencias(), match($), match(finSi);
-resultado(){
- SWITCH
-  1 identificador
-  2 operacion()
+void Declaracion(){
+    Match(VARIABLE);
+    Identificador();
+    Match(IGUAL);
+    Asignacion();
+}
 
-condicion(){
- resultado()
- match(= 0)
+void Asignacion(){
+    TOKEN t = ProximoToken();
+    if(t == CONST_NUMERICA || t == CONST_CADENA){
+        Match(t);
+    }
+    //Error Sintac tambien
+}
+
+void Lectura(){
+    Match(LEER);
+    Match(FLECHA);
+    Identificador();
+}
+
+void Escritura(){
+    Resultado();
+    Match(FLECHA);
+    Match(ESCRIBIR);
+}
+
+void Resultado(){
+    TOKEN t = ProximoToken();
+    if(t == IDENTIFICADOR){
+        Match(t);
+    }else if(t == CORCHETE_IZQ){
+        Operacion();
+    }
+    //En Micro tira lo de erro sintactico
+}
+
+void Condicional(){
+    Match(SI);
+    Match(CORCHETE_IZQ);
+    Condicion();
+    Match(CORCHETE_DER);
+    Match(PESOS);
+    Sentencias();
+    Match(PESOS);
+    Match(FIN_SI);
+}
+
+void Operacion(){
+    Match(CORCHETE_IZQ);
+    Match(IDENTIFICADOR)
+    Operador();
+    Match(IDENTIFICADOR);
+    Match(CORCHETE_DER);
+}
+
+void Operador(){
+
+    TOKEN t = ProximoToken();
+    if(t == SUMA || t == RESTA){
+        Match(t);
+    }
+    //En Micro aca hace un else con Error Sintactico
+}
+
