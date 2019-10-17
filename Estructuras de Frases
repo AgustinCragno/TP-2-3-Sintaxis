@@ -16,7 +16,7 @@ declaracion: variable identificador = asignacion
 asignacion: numeros
             cadena
             
-operacion: identificador operador identificador
+operacion: [identificador operador identificador]
 
 lectura: leer -> identificador
 
