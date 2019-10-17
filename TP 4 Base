@@ -4,6 +4,26 @@ typedef enum{
     IDENTIFICADOR, CONST_NUMERICA, CONST_CADENA
 } TOKEN;
 
+void Match(TOKEN t){
+    if( t != ProximoToken() ) ErrorSintactico();
+}
+
+TOKEN ProximoToken(){
+    TOKEN tokenActual = Scanner();
+    /*
+    *
+    */
+    return tokenActual;
+}
+
+TOKEN Scanner(){
+
+}
+
+void ErrorSintactico(){
+    printf("\n Error Sintactico")
+}
+
 void Objetivo(){
     Programa();
     Match(FDT);
