@@ -21,7 +21,14 @@ typedef struct{
 } Tabla;
 
 //tabla de simbolos
-Tabla TS[100] = { {"algoritmo", ALGORITMO}, {"finAlgoritmo", FIN_ALGORITMO}, {"leer", LEER}, {"escribir", ESCRIBIR}, {"si", SI}, {"finSi", FIN_SI}, {"variable", VARIABLE}};
+Tabla TS[100] = {{"algoritmo", ALGORITMO},
+		 {"finAlgoritmo", FIN_ALGORITMO},
+		 {"leer", LEER},
+		 {"escribir", ESCRIBIR},
+		 {"si", SI},
+		 {"finSi", FIN_SI},
+		 {"variable", VARIABLE},
+		 {"¿", 999 }};
 
 //Prototipos
 
@@ -66,21 +73,21 @@ TOKEN ProximoToken(){
     }return tokenActual;
 }
 
-int BuscarEnTs(char * id, Tabla * TS, TOKEN * t){
+int BuscarEnTs(char *id, Tabla * TS, TOKEN * t){
     /* Determina si un identificador esta en la TS */
-   /* int i = 0;
-    while ( strcmp("$", TS[i].identifi) ){ //hay que modificar esto a nuestra version
+    int i = 0;
+    while ( strcmp("¿", TS[i].identifi) ){
         if ( !strcmp(id, TS[i].identifi) ){
-            *t = TS[i].t;
+		*t = TS[i].t;
             return 1;
         }i++;
-     }return 0;*/
+     }return 0;
 }
 
 TOKEN Scanner(){
 	int tabla[NUMESTADOS][NUMCOLS] = {
 //   0   1  2  3  4  5  6   7  8  9  10 11 12 13
-//   L   D  +  -  [  ]  /   $  >  =  0 fdt sp otro
+//   L   D  +  -  [  ]  /   $  >  =  0 fdt   sp otro
  	{ 1, 3, 5, 6, 7, 8, 9, 10,11,12,13,14,0,15},
 	{ 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
 	{15,15,15,15,15,15,15,15,15,15,15,15,15,15},
@@ -102,6 +109,7 @@ TOKEN Scanner(){
 	int col;
 	int estado = 0;
 	int i = 0;
+	char in; //revisar
 	do {
  		car = fgetc(in);
  		col = columna(car);
