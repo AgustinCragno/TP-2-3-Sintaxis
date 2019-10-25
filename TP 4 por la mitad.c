@@ -30,6 +30,9 @@ Tabla TS[100] = {{"algoritmo", ALGORITMO},
 		 {"variable", VARIABLE},
 		 {"¿", 999 }};
 
+char buffer[TAMLEX];
+TOKEN tokenActual;
+int flagToken = 0;
 //Prototipos
 
 void Match(TOKEN t);
@@ -52,6 +55,9 @@ void Resultado();
 void Condicional();
 void Operacion();
 void Operador();
+void ErrorLexico();
+void Condicion();
+void Identificador();
 
 int main(){
     return 0;
@@ -61,10 +67,13 @@ int main(){
 void Match(TOKEN t){
     if( t != ProximoToken() ) ErrorSintactico();
 }
+void ErrorLexico(){
+    printf("Error Lexico\n");
+}
 
 TOKEN ProximoToken(){
     if ( !flagToken ){
-        tokenActual = scanner();
+        tokenActual = Scanner();
         if ( tokenActual == ERRORLEXICO)ErrorLexico();
         flagToken = 1;
         if ( tokenActual == IDENTIFICADOR ){
@@ -83,7 +92,7 @@ int BuscarEnTs(char *id, Tabla * TS, TOKEN * t){
         }i++;
      }return 0;
 }
-
+//Identificador
 TOKEN Scanner(){
 	int tabla[NUMESTADOS][NUMCOLS] = {
 //   0   1  2  3  4  5  6   7  8  9  10 11 12 13
@@ -275,6 +284,12 @@ void Condicional(){
     Match(FIN_SI);
 }
 
+void Condicion(){
+
+}
+void Identificador(){
+
+}
 void Operacion(){
     Match(CORCHETE_IZQ);
     Match(IDENTIFICADOR);
