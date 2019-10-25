@@ -2,12 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#define NUMESTADOS 15
-#define NUMCOLS 13
-#define TAMLEX 32+1
-#define TAMNOM 20+1
-//cuando terminamos hay que sacar los que no usamos
-
+#define NUMESTADOS 16
+#define NUMCOLS 14
+#define TAMLEX 999999
+#define TAMNOM 32
 //typesdefs
 typedef enum{
     ALGORITMO, FIN_ALGORITMO, LEER, ESCRIBIR, PESOS, BARRA, CORCHETE_IZQ, CORCHETE_DER,
@@ -17,7 +15,7 @@ typedef enum{
 
 typedef struct{
     char identifi[TAMLEX];
-    TOKEN t;/* t=0, 1, 2, 3 Palabra Reservada, t=ID=4 Identificador(ver enum)*/
+    TOKEN t;
 } Tabla;
 
 //tabla de simbolos
@@ -56,13 +54,21 @@ void Condicional();
 void Operacion();
 void Operador();
 void ErrorLexico();
-void Condicion();
-void Identificador();
+void Condicion(); // no esta hecha
+void Identificador();  // no esta hecha
 
 int main(){
-    return 0;
+    FILE *archFuente = fopen("Ejemplo.txt", "r");
+    char nomArchi[TAMNOM];
+    int l;
+    /***************************Se abre el Archivo Fuente******************/
+    if ( archFuente == NULL ){
+        printf("No se pudo abrir archivo fuente\n");
+        return -1;//no pudo abrir archivo
+    }
+    Objetivo();
+    fclose(archFuente);
 }
-
 //funciones
 void Match(TOKEN t){
     if( t != ProximoToken() ) ErrorSintactico();
@@ -118,7 +124,7 @@ TOKEN Scanner(){
 	int col;
 	int estado = 0;
 	int i = 0;
-	char in; //revisar
+	char in;
 	do {
  		car = fgetc(in);
  		col = columna(car);
@@ -254,7 +260,8 @@ void Asignacion(){
 void Lectura(){
     Match(LEER);
     Match(FLECHA);
-    Identificador();
+    Match(IDENTIFICADOR);
+    //Identificador();
 }
 
 void Escritura(){
