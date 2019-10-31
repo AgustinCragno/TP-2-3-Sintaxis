@@ -18,9 +18,9 @@ asignacion: numeros
             
 operacion: [identificador operador identificador]
 
-lectura: leer -> identificador
+lectura: leer > identificador
 
-escritura: resultado -> escribir
+escritura: resultado > escribir
 
 resultado: identificador
            operacion
