@@ -1,0 +1,10 @@
+algoritmo$
+[hola - hola] /
+variable buenas = 09 /
+variable hola = 444/
+leer > hola /
+escribir > holis /
+si[[hola - buenas]]$
+escribir > [l+aa]/
+$finSi /
+$finAlgoritmo
