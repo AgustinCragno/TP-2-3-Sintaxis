@@ -201,7 +201,7 @@ int columna(int c){
     if (c == '=') return 9;
     if  ( c == '0') return 10;
     if  ( c == EOF) return 11;
-    if  (isspace(c) || c == '\n') return 12;
+    if  (isspace(c) || c == '\n' || c == '\t') return 12;
     return 13;
 }
 
