@@ -321,5 +321,7 @@ void Operador(){
     TOKEN t = ProximoToken();
     if(t == SUMA || t == RESTA){
         Match(t);
+    } else {
+      ErrorSintactico(); //revisar
     }
 }
