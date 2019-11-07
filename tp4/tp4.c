@@ -32,7 +32,7 @@ Tabla TablaDeSimbolos[100] =
 
 char buffer[TAMLEX];
 TOKEN tokenActual;
-int flagToken = 0;
+int flagToken = 0; //esta variable la usamos para cuando usamos ProximoToken() fuera de Match() ya que necesitamos el token dos veces y el scanner quedaria un token adelantado
 FILE *archFuente;
 //Prototipos
 
